@@ -1,0 +1,11 @@
+C:\Users\Danya\source\repos\Socket\ClientTCP\bin\Debug\netcoreapp3.0\ClientTCP.exe
+C:\Users\Danya\source\repos\Socket\ClientTCP\bin\Debug\netcoreapp3.0\ClientTCP.deps.json
+C:\Users\Danya\source\repos\Socket\ClientTCP\bin\Debug\netcoreapp3.0\ClientTCP.runtimeconfig.json
+C:\Users\Danya\source\repos\Socket\ClientTCP\bin\Debug\netcoreapp3.0\ClientTCP.runtimeconfig.dev.json
+C:\Users\Danya\source\repos\Socket\ClientTCP\bin\Debug\netcoreapp3.0\ClientTCP.dll
+C:\Users\Danya\source\repos\Socket\ClientTCP\bin\Debug\netcoreapp3.0\ClientTCP.pdb
+C:\Users\Danya\source\repos\Socket\ClientTCP\obj\Debug\netcoreapp3.0\ClientTCP.AssemblyInfoInputs.cache
+C:\Users\Danya\source\repos\Socket\ClientTCP\obj\Debug\netcoreapp3.0\ClientTCP.AssemblyInfo.cs
+C:\Users\Danya\source\repos\Socket\ClientTCP\obj\Debug\netcoreapp3.0\ClientTCP.dll
+C:\Users\Danya\source\repos\Socket\ClientTCP\obj\Debug\netcoreapp3.0\ClientTCP.pdb
+C:\Users\Danya\source\repos\Socket\ClientTCP\obj\Debug\netcoreapp3.0\ClientTCP.csprojAssemblyReference.cache
