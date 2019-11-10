@@ -81,21 +81,21 @@ namespace ClientTCP
             //}
             #endregion
 
-            const string  ip_address_client = "127.0.0.1";
-            const int port = 904;
+            const string  ip_address_client = "127.0.0.1"; // константа - адрес нашей точки подключения
+            const int port = 904; 
 
             while (true)
             {
-                IPEndPoint end_client = new IPEndPoint(IPAddress.Parse(ip_address_client), port);
+                IPEndPoint end_client = new IPEndPoint(IPAddress.Parse(ip_address_client), port); // создаем точку подключения клиента
 
-                Socket socket_client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Socket socket_client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); // создаем сокет для клиента
 
-                Console.WriteLine("Поддержка вас слышит, введите вашу претензию/предложение!");
-                string message = Console.ReadLine();
+                Console.WriteLine("Введите ваше сообщение..."); // сообщение для побуждения клиента к написанию сообщения
+                string message = Console.ReadLine(); // забираем сообщение 
 
-                var data = Encoding.UTF8.GetBytes(message);
-                socket_client.Connect(end_client);
-                socket_client.Send(data);
+                var data = Encoding.UTF8.GetBytes(message); // кодируем и переводим в байты
+                socket_client.Connect(end_client); // соединяемся с сервером по указанному адресу и порту
+                socket_client.Send(data); // отправляем сообщение клиента
 
                 byte[] buffer = new byte[256]; // массив байт куда будем загружать данные, которые принял сокет выше
                 int size = 0; // вычислим размер полученного сообщения, чтоб не тратить лишнюю память
@@ -110,14 +110,14 @@ namespace ClientTCP
 
                     } while (socket_client.Available > 0); // пока полученное сообщение не передалось полностью
 
-                    Console.WriteLine(answer);
+                    Console.WriteLine(answer); // выводим ответ сервера в консоль
 
-                    socket_client.Shutdown(SocketShutdown.Both);
-                    socket_client.Close();
+                    socket_client.Shutdown(SocketShutdown.Both); // выключаем сокет на прием и передачу данных
+                    socket_client.Close(); //  закрываем соединение
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message); // выводим информацию об ошибке по надобности
                 }
                 Console.ReadLine();
             }

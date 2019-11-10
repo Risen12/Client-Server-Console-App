@@ -13,7 +13,7 @@ namespace ServerTCP
             const string address_support = "127.0.0.1"; // адрес поддержки(сервера)
             const int port_support = 904; // пор поддержки(сервера)
 
-            IPEndPoint support_endpoint = new IPEndPoint(IPAddress.Parse(address_support),port_support); // Точка подключения,нужна по сути для паузы
+            IPEndPoint support_endpoint = new IPEndPoint(IPAddress.Any,port_support); // Точка подключения,нужна по сути для паузы
 
             var Socket_support = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp); // Сам сокет, штука - посредник между сервером и протоколом(TCP/UDP)
 
@@ -26,36 +26,36 @@ namespace ServerTCP
             {
                 try
                 {
+                    StringBuilder message = new StringBuilder();
                     lisntener = Socket_support.Accept(); // создаем новый сокет для принятия информации от клиента
                     byte[] buffer = new byte[256]; // массив байт куда будем загружать данные, которые принял сокет выше
                     int size = 0; // вычислим размер полученного сообщения, чтоб не тратить лишнюю память
                     StringBuilder data = new StringBuilder(); // строка, в которую поместим полученное раскодированное сообщение
                     do
                     {
-                        size = lisntener.Receive(buffer); // узнаем размер полученной информации
+                        size = lisntener.Receive(buffer);// узнаем размер полученной информации
                         data.Append(Encoding.UTF8.GetString(buffer, 0, size)); // переносим информацию в строку для работы с ней
 
                     } while (lisntener.Available > 0); // пока полученное сообщение не передалось полностью
 
+                    //lisntener.Send(Encoding.UTF8.GetBytes("Ваше сообщение доставлено, ожидайте ответа \n"));  // Отправляем клиенту информации об успешной передачи
                     Console.WriteLine(data); // пишем полученное сообщение в консоль
-                    if (first)
+                    message.Append("Сервер принял ваш сигнал, ожидайте ответа! \n");
+                    Regex reg = new Regex(@"\S*проб\S*");
+                    MatchCollection matches = reg.Matches(data.ToString());
+                    if (matches.Count > 0)
                     {
-                        lisntener.Send(Encoding.UTF8.GetBytes("Добрый день, вас приветствует поддержка такая-то! \n"));
-                        first = false;
+                        message.Append("В чём конкретно у вас проблема? \n");
                     }
-                    lisntener.Send(Encoding.UTF8.GetBytes("Ваше сообщение доставлено, ожидайте ответа \n")); // Отправляем клиенту информации об успешной передачи
-                    Regex reg = new Regex(@"\w*проблема\w*", RegexOptions.Compiled | RegexOptions.IgnoreCase); // Регулярное выражение для поиска совпадений
-                    MatchCollection matches = reg.Matches(data.ToString()); // собственно узнаем есть ли совпадения
-                    if (matches.Count > 0) // если есть отправляем нужную информацию
-                    {
-                        lisntener.Send(Encoding.UTF8.GetBytes("В чём ваша проблема?опишите \n")); // отправка
-                    }
-                    reg = new Regex(@"\w*соединение\w*", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                    reg = new Regex(@"\S*подкл\S*");
                     matches = reg.Matches(data.ToString());
                     if (matches.Count > 0)
                     {
-                        lisntener.Send(Encoding.UTF8.GetBytes("Если у вас проблема с соединением попробуйте перезайти ещё раз \n")); // отправка
+                        message.Append("Попробуйте переподключиться! \n");
                     }
+
+                    lisntener.Send(Encoding.UTF8.GetBytes(message.ToString()));
 
                     lisntener.Shutdown(SocketShutdown.Both); //  выключаем передачу и приём информации у сокета, который принимает инфу
                     lisntener.Close(); // закрываем соединение

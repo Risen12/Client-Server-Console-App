@@ -8,4 +8,3 @@ C:\Users\Danya\source\repos\Socket\Socket\obj\Debug\netcoreapp3.0\ServerTCP.Asse
 C:\Users\Danya\source\repos\Socket\Socket\obj\Debug\netcoreapp3.0\ServerTCP.AssemblyInfo.cs
 C:\Users\Danya\source\repos\Socket\Socket\obj\Debug\netcoreapp3.0\ServerTCP.dll
 C:\Users\Danya\source\repos\Socket\Socket\obj\Debug\netcoreapp3.0\ServerTCP.pdb
-C:\Users\Danya\source\repos\Socket\Socket\obj\Debug\netcoreapp3.0\ServerTCP.csprojAssemblyReference.cache
